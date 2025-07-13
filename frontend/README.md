@@ -1,69 +1,63 @@
-# React + TypeScript + Vite
+# 💻 Frontend — PayTrack
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Sonar Quality Gate](https://img.shields.io/sonar/quality_gate/gasbrieo_paytrack_frontend?server=http%3A%2F%2Fsonarcloud.io)
+![Sonar Coverage](https://img.shields.io/sonar/coverage/gasbrieo_paytrack_frontend?server=https%3A%2F%2Fsonarcloud.io)
 
-Currently, two official plugins are available:
+The frontend for Paytrack is focused on authentication with Clerk, clean UI, and full integration with a .NET backend.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+> Built with React, Vite and Tanstack.
 
-## Expanding the ESLint configuration
+## ✨ Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- ✅ Login with Clerk
+- ✅ Add bills with name, value and due date
+- ✅ Mark bills as paid
+- ✅ Alerts for upcoming or overdue bills
+- ✅ Modern UI with shadcn/ui and Tailwind CSS
+- ✅ Integration with real backend
+- ✅ Deploy with Netlify
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🧱 Tech Stack
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+| Layer     | Stack                                |
+| --------- | ------------------------------------ |
+| Frontend  | React + Vite                         |
+| Core Libs | TanStack Router, Form, Query         |
+| Auth      | Clerk                                |
+| Styling   | Tailwind CSS + shadcn/ui             |
+| State     | Zustand                              |
+| Dev Tools | TypeScript, ESLint, Prettier, Vitest |
+| Deploy    | Netlify                              |
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 📁 Project Structure
+
+```bash
+src/
+├── components/   # Reusable UI components (shadcn-based)
+├── features/     # Feature-based folders (auth, bills, etc.)
+├── hooks/        # Shared React hooks
+├── lib/          # API client, auth utils, general helpers
+├── routes/       # TanStack route entries and layouts
+├── styles/       # Global styles
+├── testing/      # Test utilities (mocks, custom render, etc.)
+├── types/        # Shared TypeScript types
+├── utils/        # Utilities not tied to features
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🚀 Getting Started
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+1. Clone this repo
+2. Set up Clerk project and get your keys
+3. Create `.env` file with:
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```env
+VITE_API_URL=http://localhost:5100
+VITE_CLERK_PUBLISHABLE_KEY=...
+```
+
+4. Start dev server:
+
+```bash
+npm install
+npm run dev
 ```
