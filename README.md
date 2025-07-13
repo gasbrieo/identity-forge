@@ -20,7 +20,7 @@ PayTrack is a personal finance app where users register upcoming payments and ge
 | -------- | -------------------------------- |
 | Frontend | React, Vite, TanStack            |
 | Backend  | .NET 8, PostgreSQL, Minimal APIs |
-| CI       | SonarCloud                       |
+| CI       | SonarQube                        |
 | CD       | Netlify                          |
 
 ## 📁 Project Structure
