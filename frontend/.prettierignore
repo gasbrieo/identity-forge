@@ -15,4 +15,3 @@ yarn-error.log*
 
 # tanstack
 .tanstack
-routeTree.gen.ts
