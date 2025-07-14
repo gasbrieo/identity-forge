@@ -54,6 +54,6 @@ jobs:
             /d:sonar.token="${{ secrets.BACKEND_SONAR_TOKEN }}" \
             /d:sonar.cs.opencover.reportsPaths=**/coverage.opencover.xml \
             /d:sonar.exclusions=**/Migrations/**
-          dotnet build --configuration Release
-          dotnet test --configuration Release --no-build --no-restore /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
+          dotnet build IdentityForge.sln --configuration Release
+          dotnet test IdentityForge.sln --configuration Release --no-build --no-restore /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
           dotnet sonarscanner end /d:sonar.token="${{ secrets.BACKEND_SONAR_TOKEN }}"
