@@ -7,9 +7,9 @@ internal sealed class CreateUserEndpoint : IApiV1Endpoint
         app.MapPost("users", (IConfiguration configuration) =>
         {
             var conn = configuration.GetConnectionString("DefaultConnection");
-            var ad1 = configuration.GetValue<string>("AdminUser:Email");
-            var ad2 = configuration.GetValue<string>("AdminUser:Password");
-            return Results.Ok(new { conn, ad1, ad2 });
+            var email = configuration.GetValue<string>("AdminUser:Email");
+            var password = configuration.GetValue<string>("AdminUser:Password");
+            return Results.Ok(new { conn, email, password });
         })
         .WithTags(Tags.Users);
     }
