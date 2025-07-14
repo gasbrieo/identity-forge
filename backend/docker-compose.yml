@@ -1,0 +1,35 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:15
+    container_name: identityforge-db
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  identityforge.web:
+    image: identityforgeweb
+    build:
+      context: .
+      dockerfile: src/IdentityForge.Web/Dockerfile
+    depends_on:
+      - db
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT}
+      AdminUser__Email: ${ADMINUSER__EMAIL}
+      AdminUser__Password: ${ADMINUSER__PASSWORD}
+      ConnectionStrings__DefaultConnection: ${CONNECTIONSTRINGS__DEFAULT_CONNECTION}
+
+volumes:
+  postgres_data:

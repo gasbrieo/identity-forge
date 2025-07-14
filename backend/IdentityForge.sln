@@ -1,0 +1,87 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{2CF54050-5EBD-40B8-B88B-A4A7F42E6C27}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityForge.Web", "src\IdentityForge.Web\IdentityForge.Web.csproj", "{3C3C1B83-B581-43EA-B0D8-E6871E6DF202}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityForge.Domain", "src\IdentityForge.Domain\IdentityForge.Domain.csproj", "{5E032557-0508-48F8-8A64-B794AEF42069}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityForge.Application", "src\IdentityForge.Application\IdentityForge.Application.csproj", "{154E541E-B084-47E0-B116-4497FFE8275B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityForge.Infrastructure", "src\IdentityForge.Infrastructure\IdentityForge.Infrastructure.csproj", "{27020992-F1E6-4C78-932A-2CB9B4837646}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityForge.Infrastructure.IntegrationTests", "tests\IdentityForge.Infrastructure.IntegrationTests\IdentityForge.Infrastructure.IntegrationTests.csproj", "{AE7BB898-8EC3-4953-88FC-F78077326E36}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityForge.Web.AcceptanceTests", "tests\IdentityForge.Web.AcceptanceTests\IdentityForge.Web.AcceptanceTests.csproj", "{ADF0EEA4-CA0B-4970-8624-DA5080AA1779}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityForge.Domain.UnitTests", "tests\IdentityForge.Domain.UnitTests\IdentityForge.Domain.UnitTests.csproj", "{8F3A57F3-3F32-4953-A10A-9FC693CC7BFB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityForge.Application.UnitTests", "tests\IdentityForge.Application.UnitTests\IdentityForge.Application.UnitTests.csproj", "{E393B672-2367-4283-8FE1-43BECB4E7DCB}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{81DDED9D-158B-E303-5F62-77A2896D2A5A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3C3C1B83-B581-43EA-B0D8-E6871E6DF202}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C3C1B83-B581-43EA-B0D8-E6871E6DF202}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C3C1B83-B581-43EA-B0D8-E6871E6DF202}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C3C1B83-B581-43EA-B0D8-E6871E6DF202}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E032557-0508-48F8-8A64-B794AEF42069}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E032557-0508-48F8-8A64-B794AEF42069}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E032557-0508-48F8-8A64-B794AEF42069}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E032557-0508-48F8-8A64-B794AEF42069}.Release|Any CPU.Build.0 = Release|Any CPU
+		{154E541E-B084-47E0-B116-4497FFE8275B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{154E541E-B084-47E0-B116-4497FFE8275B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{154E541E-B084-47E0-B116-4497FFE8275B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{154E541E-B084-47E0-B116-4497FFE8275B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27020992-F1E6-4C78-932A-2CB9B4837646}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27020992-F1E6-4C78-932A-2CB9B4837646}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27020992-F1E6-4C78-932A-2CB9B4837646}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27020992-F1E6-4C78-932A-2CB9B4837646}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE7BB898-8EC3-4953-88FC-F78077326E36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE7BB898-8EC3-4953-88FC-F78077326E36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE7BB898-8EC3-4953-88FC-F78077326E36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE7BB898-8EC3-4953-88FC-F78077326E36}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADF0EEA4-CA0B-4970-8624-DA5080AA1779}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADF0EEA4-CA0B-4970-8624-DA5080AA1779}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADF0EEA4-CA0B-4970-8624-DA5080AA1779}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADF0EEA4-CA0B-4970-8624-DA5080AA1779}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F3A57F3-3F32-4953-A10A-9FC693CC7BFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F3A57F3-3F32-4953-A10A-9FC693CC7BFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F3A57F3-3F32-4953-A10A-9FC693CC7BFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F3A57F3-3F32-4953-A10A-9FC693CC7BFB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E393B672-2367-4283-8FE1-43BECB4E7DCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E393B672-2367-4283-8FE1-43BECB4E7DCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E393B672-2367-4283-8FE1-43BECB4E7DCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E393B672-2367-4283-8FE1-43BECB4E7DCB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3C3C1B83-B581-43EA-B0D8-E6871E6DF202} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{5E032557-0508-48F8-8A64-B794AEF42069} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{154E541E-B084-47E0-B116-4497FFE8275B} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{27020992-F1E6-4C78-932A-2CB9B4837646} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{AE7BB898-8EC3-4953-88FC-F78077326E36} = {2CF54050-5EBD-40B8-B88B-A4A7F42E6C27}
+		{ADF0EEA4-CA0B-4970-8624-DA5080AA1779} = {2CF54050-5EBD-40B8-B88B-A4A7F42E6C27}
+		{8F3A57F3-3F32-4953-A10A-9FC693CC7BFB} = {2CF54050-5EBD-40B8-B88B-A4A7F42E6C27}
+		{E393B672-2367-4283-8FE1-43BECB4E7DCB} = {2CF54050-5EBD-40B8-B88B-A4A7F42E6C27}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {60F6D41B-CF93-409B-9BF9-1080828BBD1A}
+	EndGlobalSection
+EndGlobal
