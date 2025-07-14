@@ -55,8 +55,8 @@ jobs:
       - name: Run SonarQube Scan
         run: |
           sonar-scanner \
-            -Dsonar.projectKey=gasbrieo_paytrack_frontend \
-            -Dsonar.projectName=paytrack_frontend \
+            -Dsonar.projectKey=gasbrieo_identity-forge_frontend \
+            -Dsonar.projectName=identity-forge_frontend \
             -Dsonar.organization=gasbrieo \
             -Dsonar.host.url=https://sonarcloud.io \
             -Dsonar.token=${{ secrets.FRONTEND_SONAR_TOKEN }} \
