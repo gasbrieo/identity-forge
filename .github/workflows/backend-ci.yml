@@ -12,7 +12,7 @@ on:
       - "backend/**"
 
 jobs:
-  build-and-analyze:
+  ci:
     runs-on: ubuntu-latest
 
     defaults:
