@@ -29,7 +29,7 @@ services:
       ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT}
       AdminUser__Email: ${ADMINUSER__EMAIL}
       AdminUser__Password: ${ADMINUSER__PASSWORD}
-      ConnectionStrings__DefaultConnection: ${CONNECTIONSTRINGS__DEFAULT_CONNECTION}
+      ConnectionStrings__DefaultConnection: ${CONNECTIONSTRINGS__DEFAULTCONNECTION}
 
 volumes:
   postgres_data:
