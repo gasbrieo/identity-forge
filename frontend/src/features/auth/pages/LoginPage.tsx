@@ -2,7 +2,24 @@ import { Button } from "@gasbrieo/react-ui";
 import { Link } from "@tanstack/react-router";
 import { ShieldIcon } from "lucide-react";
 
+const getGoogleOAuthUrl = () => {
+  const params = new URLSearchParams({
+    client_id: import.meta.env.VITE_OAUTH_GOOGLE_CLIENT_ID,
+    redirect_uri: import.meta.env.VITE_OAUTH_REDIRECT_URL,
+    response_type: "code",
+    scope: "openid email profile",
+    access_type: "offline",
+    prompt: "consent",
+  });
+
+  return `https://accounts.google.com/o/oauth2/v2/auth?${params.toString()}`;
+};
+
 export const LoginPage = () => {
+  const handleGoogleLogin = async () => {
+    window.location.href = getGoogleOAuthUrl();
+  };
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-center bg-background px-4">
       <div className="flex flex-col items-center gap-4 text-center">
@@ -11,7 +28,7 @@ export const LoginPage = () => {
       </div>
 
       <div className="mt-8 flex w-full max-w-xs flex-col gap-3">
-        <Button variant="outline">
+        <Button variant="outline" onClick={handleGoogleLogin}>
           <svg className="mr-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 533.5 544.3">
             <path
               fill="#4285f4"

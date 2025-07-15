@@ -94,6 +94,8 @@ public static class DependencyInjection
 
     private static IServiceCollection AddServices(this IServiceCollection services)
     {
+        services.AddHttpClient();
+
         services.AddTransient<IIdentityService, IdentityService>();
 
         return services;
