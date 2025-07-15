@@ -1,5 +1,4 @@
 import { Link } from "@tanstack/react-router";
-import { ShieldIcon } from "lucide-react";
 
 import { ModeToggle } from "~/components/mode-toggle";
 import { Button } from "~/components/ui/button";
@@ -9,12 +8,9 @@ export const LandingPage = () => {
     <main className="bg-background min-h-screen">
       <header className="w-full border-b border-border bg-background">
         <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-6">
-          <div className="flex items-center gap-2 text-xl font-bold">
-            <ShieldIcon className="h-5 w-5 text-primary" />
-            IdentityForge
-          </div>
+          <div className="text-xl font-bold">IdentityForge</div>
           <nav>
-            <ul className="flex items-center gap-4 text-sm font-medium">
+            <ul className="flex items-center gap-1 text-sm font-medium">
               <li>
                 <Button variant="ghost" asChild>
                   <Link to="/auth/login">Log in</Link>
