@@ -7,7 +7,7 @@ const RootComponent = () => (
   <>
     <Outlet />
     <TanStackRouterDevtools position="bottom-right" />
-    <ReactQueryDevtools buttonPosition="top-right" />
+    <ReactQueryDevtools buttonPosition="bottom-left" />
   </>
 );
 
