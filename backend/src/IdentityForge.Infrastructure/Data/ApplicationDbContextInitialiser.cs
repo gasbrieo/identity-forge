@@ -1,5 +1,6 @@
+using IdentityForge.Application.Identity.Authorization;
 using IdentityForge.Domain.Users;
-using IdentityForge.Infrastructure.Identity;
+using IdentityForge.Infrastructure.Options;
 
 namespace IdentityForge.Infrastructure.Data;
 
@@ -10,7 +11,7 @@ public class ApplicationDbContextInitialiser(
     UserManager<ApplicationUser> userManager,
     RoleManager<ApplicationRole> roleManager)
 {
-    private readonly AdminUserOptions _adminUser = options.Value;
+    private readonly AdminUserOptions _adminUserOptions = options.Value;
 
     public async Task InitialiseAsync()
     {
@@ -54,11 +55,11 @@ public class ApplicationDbContextInitialiser(
             }
         }
 
-        var administrator = new ApplicationUser { UserName = _adminUser.Email, Email = _adminUser.Email };
+        var administrator = new ApplicationUser { UserName = _adminUserOptions.Email, Email = _adminUserOptions.Email };
 
         if (await userManager.Users.AllAsync(u => u.UserName != administrator.UserName))
         {
-            await userManager.CreateAsync(administrator, _adminUser.Password);
+            await userManager.CreateAsync(administrator, _adminUserOptions.Password);
             await userManager.AddToRolesAsync(administrator, [Roles.Administrator]);
         }
     }

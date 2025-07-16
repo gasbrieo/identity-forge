@@ -2,6 +2,11 @@ using IdentityForge.Application.Identity;
 using IdentityForge.Domain.Users;
 using IdentityForge.Infrastructure.Data;
 using IdentityForge.Infrastructure.Identity;
+using IdentityForge.Infrastructure.Identity.Jwt;
+using IdentityForge.Infrastructure.Identity.OAuth;
+using IdentityForge.Infrastructure.Identity.OAuth.GitHub;
+using IdentityForge.Infrastructure.Identity.OAuth.Google;
+using IdentityForge.Infrastructure.Options;
 
 namespace IdentityForge.Infrastructure;
 
@@ -9,92 +14,91 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
-        return services
-            .AddDb(configuration)
-            .AddHealth()
-            .AddIdentity()
-            .AddAdminUserOptions(configuration)
-            .AddAuthenticationInternal(configuration)
-            .AddAuthorizationInternal()
-            .AddServices();
-    }
-
-    private static IServiceCollection AddDb(this IServiceCollection services, IConfiguration config)
-    {
-        var conn = config.GetConnectionString("DefaultConnection");
-
         services.AddDbContext<ApplicationDbContext>((sp, opts) =>
         {
-            opts.UseNpgsql(conn).AddAsyncSeeding(sp);
+            opts.UseNpgsql(configuration.GetConnectionString("DefaultConnection")).AddAsyncSeeding(sp);
         });
 
         services.AddScoped<ApplicationDbContextInitialiser>();
 
-        return services;
-    }
-
-    private static IServiceCollection AddHealth(this IServiceCollection services)
-    {
         services
             .AddHealthChecks()
             .AddDbContextCheck<ApplicationDbContext>("Database");
 
-        return services;
-    }
-
-    private static IServiceCollection AddIdentity(this IServiceCollection services)
-    {
-        services
-            .AddIdentityCore<ApplicationUser>()
+        services.AddIdentityCore<ApplicationUser>()
             .AddRoles<ApplicationRole>()
             .AddEntityFrameworkStores<ApplicationDbContext>();
 
-        return services;
-    }
+        services
+            .AddOptions<AdminUserOptions>()
+            .Bind(configuration.GetSection("AdminUser"))
+            .ValidateOnStart();
 
-    private static IServiceCollection AddAdminUserOptions(this IServiceCollection services, IConfiguration config)
-    {
-        services.Configure<AdminUserOptions>(options =>
-        {
-            var section = config.GetSection("AdminUser");
-            if (!section.Exists())
-                throw new InvalidOperationException("Section 'AdminUser' is missing");
+        services.AddSingleton<IValidateOptions<AdminUserOptions>, AdminUserOptionsValidator>();
 
-            section.Bind(options);
+        services
+            .AddOptions<JwtOptions>()
+            .Bind(configuration.GetSection("Jwt"))
+            .ValidateOnStart();
 
-            if (string.IsNullOrWhiteSpace(options.Email))
-                throw new InvalidOperationException("Admin user email not configured");
+        services.AddSingleton<IValidateOptions<JwtOptions>, JwtOptionsValidator>();
 
-            if (string.IsNullOrWhiteSpace(options.Password))
-                throw new InvalidOperationException("Admin user password not configured");
-        });
+        services
+            .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(options =>
+            {
+                var jwt = configuration.GetSection("Jwt").Get<JwtOptions>()!;
 
-        return services;
-    }
+                options.RequireHttpsMetadata = false;
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwt.Secret)),
+                    ValidIssuer = jwt.Issuer,
+                    ValidAudience = jwt.Audience,
+                    ClockSkew = TimeSpan.Zero
+                };
+                options.Events = JwtEventsHelper.CreateDefault();
+            });
 
-    private static IServiceCollection AddAuthenticationInternal(this IServiceCollection services, IConfiguration config)
-    {
-        services.AddAuthentication();
+        services.AddAuthorization();
 
         services.AddHttpContextAccessor();
+
+        services.AddHttpClient();
 
         services.AddScoped<IUserContext, UserContext>();
 
         services.AddSingleton<ITokenProvider, TokenProvider>();
 
-        return services;
-    }
+        services
+            .AddOptions<GoogleOAuthOptions>()
+            .Bind(configuration.GetSection("OAuth:Google"))
+            .ValidateOnStart();
 
-    private static IServiceCollection AddAuthorizationInternal(this IServiceCollection services)
-    {
-        services.AddAuthorization();
+        services.AddSingleton<IValidateOptions<GoogleOAuthOptions>, GoogleOAuthOptionsValidator>();
 
-        return services;
-    }
+        services.AddHttpClient<GoogleOAuthProviderService>(client =>
+        {
+            client.Timeout = TimeSpan.FromSeconds(10);
+        });
 
-    private static IServiceCollection AddServices(this IServiceCollection services)
-    {
-        services.AddHttpClient();
+        services.AddScoped<IOAuthProviderService, GoogleOAuthProviderService>();
+
+        services
+            .AddOptions<GitHubOAuthOptions>()
+            .Bind(configuration.GetSection("OAuth:GitHub"))
+            .ValidateOnStart();
+
+        services.AddSingleton<IValidateOptions<GitHubOAuthOptions>, GitHubOAuthOptionsValidator>();
+
+        services.AddHttpClient<GitHubOAuthProviderService>(client =>
+        {
+            client.Timeout = TimeSpan.FromSeconds(10);
+        });
+
+        services.AddScoped<IOAuthProviderService, GitHubOAuthProviderService>();
+
+        services.AddScoped<IOAuthProviderFactory, OAuthProviderFactory>();
 
         services.AddTransient<IIdentityService, IdentityService>();
 

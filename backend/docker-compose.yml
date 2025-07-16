@@ -30,6 +30,16 @@ services:
       AdminUser__Email: ${ADMINUSER__EMAIL}
       AdminUser__Password: ${ADMINUSER__PASSWORD}
       ConnectionStrings__DefaultConnection: ${CONNECTIONSTRINGS__DEFAULTCONNECTION}
+      Jwt__Issuer: ${JWT__ISSUER}
+      Jwt__Audience: ${JWT__AUDIENCE}
+      Jwt__ExpirationMinutes: ${JWT__EXPIRATIONMINUTES}
+      Jwt__Secret: ${JWT__SECRET}
+      OAuth__Google__ClientId: ${OAUTH__GOOGLE__CLIENTID}
+      OAuth__Google__ClientSecret: ${OAUTH__GOOGLE__CLIENTSECRET}
+      OAuth__Google__DefaultRedirectUri: ${OAUTH__GOOGLE__DEFAULTREDIRECTURI}
+      OAuth__GitHub__ClientId: ${OAUTH__GITHUB__CLIENTID}
+      OAuth__GitHub__ClientSecret: ${OAUTH__GITHUB__CLIENTSECRET}
+      OAuth__GitHub__DefaultRedirectUri: ${OAUTH__GITHUB__DEFAULTREDIRECTURI}
 
 volumes:
   postgres_data:

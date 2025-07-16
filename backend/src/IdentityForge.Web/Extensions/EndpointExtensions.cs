@@ -1,4 +1,4 @@
-using IdentityForge.Infrastructure.Identity;
+using IdentityForge.Application.Identity.Authorization;
 using IdentityForge.Web.Endpoints;
 
 namespace IdentityForge.Web.Extensions;

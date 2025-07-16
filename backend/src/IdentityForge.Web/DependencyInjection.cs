@@ -21,6 +21,12 @@ public static class DependencyInjection
                 options.SubstituteApiVersionInUrl = true;
             });
 
+
+        services.ConfigureHttpJsonOptions(options =>
+        {
+            options.SerializerOptions.Converters.Add(new JsonStringEnumConverter());
+        });
+
         services.AddExceptionHandler<GlobalExceptionHandler>();
 
         services.AddProblemDetails();

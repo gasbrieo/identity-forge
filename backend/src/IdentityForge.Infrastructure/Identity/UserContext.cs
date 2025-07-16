@@ -1,4 +1,5 @@
 using IdentityForge.Application.Identity;
+using IdentityForge.Infrastructure.Identity.Extensions;
 
 namespace IdentityForge.Infrastructure.Identity;
 
