@@ -22,7 +22,8 @@ export interface ExchangeOAuthCodeRequest {
 export interface AuthResponse {
   email: string;
   name: string;
-  avatarUri: string;
+  avatarUrl: string;
+  user: {};
   token: string;
 }
 

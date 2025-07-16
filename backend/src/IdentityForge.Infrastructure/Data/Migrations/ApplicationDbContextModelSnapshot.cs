@@ -58,7 +58,7 @@ namespace IdentityForge.Infrastructure.Data.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("integer");
 
-                    b.Property<string>("AvatarUri")
+                    b.Property<string>("AvatarUrl")
                         .HasColumnType("text");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -79,6 +79,7 @@ namespace IdentityForge.Infrastructure.Data.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("NormalizedEmail")

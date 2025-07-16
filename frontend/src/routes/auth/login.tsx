@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 import { ShieldIcon } from "lucide-react";
 
 import { Button } from "~/components/ui/button";
@@ -65,5 +65,10 @@ const LoginPage = () => {
 };
 
 export const Route = createFileRoute("/auth/login")({
+  beforeLoad: ({ context }) => {
+    if (context.auth.isAuthenticated) {
+      throw redirect({ to: "/dashboard" });
+    }
+  },
   component: LoginPage,
 });

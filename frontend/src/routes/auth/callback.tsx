@@ -1,10 +1,13 @@
-import { Await, createFileRoute } from "@tanstack/react-router";
+import { Await, createFileRoute, Navigate, redirect } from "@tanstack/react-router";
 
 import { exchangeOAuthCode } from "~/services/auth.service";
+import { useAuthStore } from "~/stores/auth.store";
 import type { OAuthProvider } from "~/types/auth.types";
 
 const OAuthCallbackPage = () => {
   const { exchangeOAuthCodePromise } = Route.useLoaderData();
+
+  const login = useAuthStore((state) => state.login);
 
   return (
     <Await
@@ -18,13 +21,20 @@ const OAuthCallbackPage = () => {
       }
     >
       {(data) => {
-        return <div>{data.email}</div>;
+        login(data);
+
+        return <Navigate to="/dashboard" replace />;
       }}
     </Await>
   );
 };
 
 export const Route = createFileRoute("/auth/callback")({
+  beforeLoad: ({ context }) => {
+    if (context.auth.isAuthenticated) {
+      throw redirect({ to: "/dashboard" });
+    }
+  },
   loader: ({ location }) => {
     const search = new URLSearchParams(location.search);
     const code = search.get("code");

@@ -26,7 +26,7 @@ internal sealed class ExchangeOAuthCodeHandler(IOAuthProviderFactory providerFac
             {
                 Email = oAuthUserInfo.Email,
                 UserName = oAuthUserInfo.Email,
-                AvatarUri = oAuthUserInfo.AvatarUri,
+                AvatarUrl = oAuthUserInfo.AvatarUrl,
                 Name = oAuthUserInfo.Name,
                 EmailConfirmed = true,
             };
@@ -44,6 +44,6 @@ internal sealed class ExchangeOAuthCodeHandler(IOAuthProviderFactory providerFac
 
         var token = tokenProvider.Create(user);
 
-        return new AuthResponse(user.Email!, user.Name, user.AvatarUri, token);
+        return new AuthResponse(user.Email!, user.Name, user.AvatarUrl, token);
     }
 }

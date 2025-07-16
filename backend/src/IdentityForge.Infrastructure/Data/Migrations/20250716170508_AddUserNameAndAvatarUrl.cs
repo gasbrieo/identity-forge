@@ -5,13 +5,13 @@
 namespace IdentityForge.Infrastructure.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class AddAvatarAndNameColumnToUser : Migration
+    public partial class AddUserNameAndAvatarUrl : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<string>(
-                name: "AvatarUri",
+                name: "AvatarUrl",
                 table: "AspNetUsers",
                 type: "text",
                 nullable: true);
@@ -20,14 +20,15 @@ namespace IdentityForge.Infrastructure.Data.Migrations
                 name: "Name",
                 table: "AspNetUsers",
                 type: "text",
-                nullable: true);
+                nullable: false,
+                defaultValue: "");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "AvatarUri",
+                name: "AvatarUrl",
                 table: "AspNetUsers");
 
             migrationBuilder.DropColumn(

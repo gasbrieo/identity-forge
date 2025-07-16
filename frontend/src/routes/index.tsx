@@ -4,6 +4,8 @@ import { ModeToggle } from "~/components/mode-toggle";
 import { Button } from "~/components/ui/button";
 
 const LandingPage = () => {
+  const { auth } = Route.useRouteContext();
+
   return (
     <main className="bg-background min-h-screen">
       <header className="w-full border-b border-border bg-background">
@@ -12,9 +14,15 @@ const LandingPage = () => {
           <nav>
             <ul className="flex items-center gap-1 text-sm font-medium">
               <li>
-                <Button variant="ghost" asChild>
-                  <Link to="/auth/login">Log in</Link>
-                </Button>
+                {auth.isAuthenticated ? (
+                  <Button variant="ghost" asChild>
+                    <Link to="/dashboard">Dashboard</Link>
+                  </Button>
+                ) : (
+                  <Button variant="ghost" asChild>
+                    <Link to="/auth/login">Log in</Link>
+                  </Button>
+                )}
               </li>
               <li>
                 <ModeToggle />

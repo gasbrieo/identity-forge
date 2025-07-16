@@ -26,6 +26,6 @@ internal sealed class LoginWithEmailHandler(IIdentityService identityService, IT
 
         var token = tokenProvider.Create(user);
 
-        return new AuthResponse(user.Email!, user.Name, user.AvatarUri, token);
+        return new AuthResponse(user.Email!, user.Name, user.AvatarUrl, token);
     }
 }

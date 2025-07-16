@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace IdentityForge.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250715211842_AddAvatarAndNameColumnToUser")]
-    partial class AddAvatarAndNameColumnToUser
+    [Migration("20250716170508_AddUserNameAndAvatarUrl")]
+    partial class AddUserNameAndAvatarUrl
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -61,7 +61,7 @@ namespace IdentityForge.Infrastructure.Data.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("integer");
 
-                    b.Property<string>("AvatarUri")
+                    b.Property<string>("AvatarUrl")
                         .HasColumnType("text");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -82,6 +82,7 @@ namespace IdentityForge.Infrastructure.Data.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("NormalizedEmail")
