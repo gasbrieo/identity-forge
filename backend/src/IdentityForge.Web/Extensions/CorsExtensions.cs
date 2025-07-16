@@ -13,7 +13,8 @@ public static class CorsExtensions
                 policy
                     .SetIsOriginAllowed(_ => true)
                     .AllowAnyMethod()
-                    .AllowAnyHeader();
+                    .AllowAnyHeader()
+                    .WithExposedHeaders("WWW-Authenticate");
             });
         });
 

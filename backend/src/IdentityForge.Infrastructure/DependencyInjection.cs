@@ -1,4 +1,5 @@
 using IdentityForge.Application.Identity;
+using IdentityForge.Application.Identity.Authorization;
 using IdentityForge.Domain.Users;
 using IdentityForge.Infrastructure.Data;
 using IdentityForge.Infrastructure.Identity;
@@ -57,10 +58,16 @@ public static class DependencyInjection
                     ValidAudience = jwt.Audience,
                     ClockSkew = TimeSpan.Zero
                 };
-                options.Events = JwtEventsHelper.CreateDefault();
             });
 
-        services.AddAuthorization();
+        services.AddAuthorization(options =>
+        {
+            foreach (var permission in Permissions.All)
+            {
+                options.AddPolicy(permission.Name, policy =>
+                    policy.RequireRole(permission.Roles));
+            }
+        });
 
         services.AddHttpContextAccessor();
 

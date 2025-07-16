@@ -41,5 +41,8 @@ const DashboardPage = () => {
 };
 
 export const Route = createFileRoute("/dashboard/")({
+  loader: async ({ context }) => {
+    await context.queryClient.ensureQueryData(healthQueries.list());
+  },
   component: DashboardPage,
 });
