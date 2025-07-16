@@ -1,7 +1,7 @@
 import { Await, createFileRoute } from "@tanstack/react-router";
 
-import type { OAuthProviderSchema } from "~/schemas/auth.schemas";
 import { exchangeOAuthCode } from "~/services/auth.service";
+import type { OAuthProvider } from "~/types/auth.types";
 
 const OAuthCallbackPage = () => {
   const { exchangeOAuthCodePromise } = Route.useLoaderData();
@@ -28,7 +28,7 @@ export const Route = createFileRoute("/auth/callback")({
   loader: ({ location }) => {
     const search = new URLSearchParams(location.search);
     const code = search.get("code");
-    const provider = search.get("state") as OAuthProviderSchema | null;
+    const provider = search.get("state") as OAuthProvider | null;
 
     if (!code) throw new Error("Invalid OAuth callback (no code found).");
 

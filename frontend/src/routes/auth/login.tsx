@@ -2,12 +2,12 @@ import { createFileRoute } from "@tanstack/react-router";
 import { ShieldIcon } from "lucide-react";
 
 import { Button } from "~/components/ui/button";
-import type { LoginWithOAuthSchema } from "~/schemas/auth.schemas";
 import { loginWithOAuth } from "~/services/auth.service";
+import type { OAuthProvider } from "~/types/auth.types";
 
 const LoginPage = () => {
-  const handleOAuthLogin = async (data: LoginWithOAuthSchema) => {
-    const { url } = loginWithOAuth(data);
+  const handleOAuthLogin = async (provider: OAuthProvider) => {
+    const { url } = loginWithOAuth({ provider });
     window.location.href = url;
   };
 
@@ -19,7 +19,7 @@ const LoginPage = () => {
       </div>
 
       <div className="mt-8 flex w-full max-w-xs flex-col gap-3">
-        <Button variant="outline" onClick={() => handleOAuthLogin({ provider: "google" })}>
+        <Button variant="outline" onClick={() => handleOAuthLogin("google")}>
           <svg className="mr-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 533.5 544.3">
             <path
               fill="#4285f4"
@@ -41,7 +41,7 @@ const LoginPage = () => {
           Continue with Google
         </Button>
 
-        <Button variant="outline" onClick={() => handleOAuthLogin({ provider: "github" })}>
+        <Button variant="outline" onClick={() => handleOAuthLogin("github")}>
           <svg className="mr-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
             <path
               fillRule="evenodd"
