@@ -1,7 +1,6 @@
 import { cn } from "@gasbrieo/react-ui";
 import * as LabelPrimitive from "@radix-ui/react-label";
 
-
 import type { LabelProps } from "./Label.types";
 
 export const Label = ({ className, ...props }: LabelProps) => {
