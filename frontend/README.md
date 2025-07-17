@@ -60,3 +60,12 @@ VITE_API_URL=http://localhost:5100
 npm install
 npm run dev
 ```
+
+## Todos
+
+[ ] Refresh tokens
+[ ] Lockout user
+[ ] Roles/Claims
+[ ] User management page (admin only)
+[ ] Some dash random page (for all roles)
+[ ] Unit testing / e2e testing
