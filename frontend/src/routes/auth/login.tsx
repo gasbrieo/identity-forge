@@ -59,7 +59,7 @@ const LoginPage = () => {
         </Button>
 
         <Button variant="outline" asChild>
-          <Link to="/auth/magic-link/send">Continue with Email</Link>
+          <Link to="/auth/magic-link/send">Continue with Magic Link</Link>
         </Button>
       </div>
     </main>
