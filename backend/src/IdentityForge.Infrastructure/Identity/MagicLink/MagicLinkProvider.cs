@@ -31,6 +31,6 @@ public class MagicLinkProvider(IOptions<MagicLinkOptions> options, IEmailSender 
             If you didn’t request this, just ignore this email.
         """;
 
-        await emailSender.SendAsync(magicLinkToken.Email, subject, body, isHtml: false, cancellationToken);
+        await emailSender.SendAsync(magicLinkToken.Email, subject, body, null, cancellationToken);
     }
 }

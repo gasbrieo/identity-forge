@@ -27,20 +27,36 @@ services:
       - .env
     environment:
       ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT}
+
       AdminUser__Email: ${ADMINUSER__EMAIL}
       AdminUser__Name: ${ADMINUSER__NAME}
       AdminUser__AvatarUrl: ${ADMINUSER__AVATARURL}
+
       ConnectionStrings__DefaultConnection: ${CONNECTIONSTRINGS__DEFAULTCONNECTION}
+
       Jwt__Issuer: ${JWT__ISSUER}
       Jwt__Audience: ${JWT__AUDIENCE}
       Jwt__ExpirationMinutes: ${JWT__EXPIRATIONMINUTES}
       Jwt__Secret: ${JWT__SECRET}
+
       OAuth__Google__ClientId: ${OAUTH__GOOGLE__CLIENTID}
       OAuth__Google__ClientSecret: ${OAUTH__GOOGLE__CLIENTSECRET}
       OAuth__Google__DefaultRedirectUrl: ${OAUTH__GOOGLE__DEFAULTREDIRECTURL}
+
       OAuth__GitHub__ClientId: ${OAUTH__GITHUB__CLIENTID}
       OAuth__GitHub__ClientSecret: ${OAUTH__GITHUB__CLIENTSECRET}
       OAuth__GitHub__DefaultRedirectUrl: ${OAUTH__GITHUB__DEFAULTREDIRECTURL}
+
+      MagicLink__DefaultRedirectUrl: ${MAGICLINK__DEFAULTREDIRECTURL}
+      MagicLink__ExpirationMinutes: ${MAGICLINK__EXPIRATIONMINUTES}
+      
+      MailServer__Hostname: ${MAILSERVER__HOSTNAME}
+      MailServer__Port: ${MAILSERVER__PORT}
+      MailServer__Username: ${MAILSERVER__USERNAME}
+      MailServer__Password: ${MAILSERVER__PASSWORD}
+      MailServer__UseSsl: ${MAILSERVER__USESSL}
+      MailServer__DefaultFromAddress: ${MAILSERVER__DEFAULTFROMADDRESS}
+      MailServer__DefaultFromName: ${MAILSERVER__DEFAULTFROMNAME}
 
 volumes:
   postgres_data:

@@ -109,7 +109,12 @@ public static class DependencyInjection
 
         services.AddScoped<IOAuthProviderFactory, OAuthProviderFactory>();
 
-        services.AddSingleton<IEmailSender, FakeEmailSender>();
+        services
+            .AddOptions<MailServerOptions>()
+            .Bind(configuration.GetSection("MailServer"))
+            .ValidateOnStart();
+
+        services.AddSingleton<IEmailSender, SmtpEmailSender>();
 
         services.AddTransient<IUserRepository, UserRepository>();
 
