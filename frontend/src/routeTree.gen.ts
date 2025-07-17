@@ -14,7 +14,8 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
 import { Route as AuthLogoutRouteImport } from './routes/auth/logout'
 import { Route as AuthLoginRouteImport } from './routes/auth/login'
-import { Route as AuthCallbackRouteImport } from './routes/auth/callback'
+import { Route as AuthOauthExchangeRouteImport } from './routes/auth/oauth/exchange'
+import { Route as AuthMagicLinkVerifyRouteImport } from './routes/auth/magic-link/verify'
 
 const DashboardRoute = DashboardRouteImport.update({
   id: '/dashboard',
@@ -41,63 +42,80 @@ const AuthLoginRoute = AuthLoginRouteImport.update({
   path: '/auth/login',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthCallbackRoute = AuthCallbackRouteImport.update({
-  id: '/auth/callback',
-  path: '/auth/callback',
+const AuthOauthExchangeRoute = AuthOauthExchangeRouteImport.update({
+  id: '/auth/oauth/exchange',
+  path: '/auth/oauth/exchange',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthMagicLinkVerifyRoute = AuthMagicLinkVerifyRouteImport.update({
+  id: '/auth/magic-link/verify',
+  path: '/auth/magic-link/verify',
   getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRouteWithChildren
-  '/auth/callback': typeof AuthCallbackRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/logout': typeof AuthLogoutRoute
   '/dashboard/': typeof DashboardIndexRoute
+  '/auth/magic-link/verify': typeof AuthMagicLinkVerifyRoute
+  '/auth/oauth/exchange': typeof AuthOauthExchangeRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/auth/callback': typeof AuthCallbackRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/logout': typeof AuthLogoutRoute
   '/dashboard': typeof DashboardIndexRoute
+  '/auth/magic-link/verify': typeof AuthMagicLinkVerifyRoute
+  '/auth/oauth/exchange': typeof AuthOauthExchangeRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRouteWithChildren
-  '/auth/callback': typeof AuthCallbackRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/logout': typeof AuthLogoutRoute
   '/dashboard/': typeof DashboardIndexRoute
+  '/auth/magic-link/verify': typeof AuthMagicLinkVerifyRoute
+  '/auth/oauth/exchange': typeof AuthOauthExchangeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/dashboard'
-    | '/auth/callback'
     | '/auth/login'
     | '/auth/logout'
     | '/dashboard/'
+    | '/auth/magic-link/verify'
+    | '/auth/oauth/exchange'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth/callback' | '/auth/login' | '/auth/logout' | '/dashboard'
+  to:
+    | '/'
+    | '/auth/login'
+    | '/auth/logout'
+    | '/dashboard'
+    | '/auth/magic-link/verify'
+    | '/auth/oauth/exchange'
   id:
     | '__root__'
     | '/'
     | '/dashboard'
-    | '/auth/callback'
     | '/auth/login'
     | '/auth/logout'
     | '/dashboard/'
+    | '/auth/magic-link/verify'
+    | '/auth/oauth/exchange'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DashboardRoute: typeof DashboardRouteWithChildren
-  AuthCallbackRoute: typeof AuthCallbackRoute
   AuthLoginRoute: typeof AuthLoginRoute
   AuthLogoutRoute: typeof AuthLogoutRoute
+  AuthMagicLinkVerifyRoute: typeof AuthMagicLinkVerifyRoute
+  AuthOauthExchangeRoute: typeof AuthOauthExchangeRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -137,11 +155,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthLoginRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/auth/callback': {
-      id: '/auth/callback'
-      path: '/auth/callback'
-      fullPath: '/auth/callback'
-      preLoaderRoute: typeof AuthCallbackRouteImport
+    '/auth/oauth/exchange': {
+      id: '/auth/oauth/exchange'
+      path: '/auth/oauth/exchange'
+      fullPath: '/auth/oauth/exchange'
+      preLoaderRoute: typeof AuthOauthExchangeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/magic-link/verify': {
+      id: '/auth/magic-link/verify'
+      path: '/auth/magic-link/verify'
+      fullPath: '/auth/magic-link/verify'
+      preLoaderRoute: typeof AuthMagicLinkVerifyRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -162,9 +187,10 @@ const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DashboardRoute: DashboardRouteWithChildren,
-  AuthCallbackRoute: AuthCallbackRoute,
   AuthLoginRoute: AuthLoginRoute,
   AuthLogoutRoute: AuthLogoutRoute,
+  AuthMagicLinkVerifyRoute: AuthMagicLinkVerifyRoute,
+  AuthOauthExchangeRoute: AuthOauthExchangeRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

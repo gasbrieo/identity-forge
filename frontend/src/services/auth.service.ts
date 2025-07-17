@@ -4,10 +4,11 @@ import {
   type AuthResponse,
   type ExchangeOAuthCodeRequest,
   type LoginWithOAuthRequest,
+  type VerifyMagicLinkRequest,
 } from "~/types/auth.types";
 
 export const loginWithOAuth = (data: LoginWithOAuthRequest) => {
-  const redirectUri = `${window.location.origin}/auth/callback`;
+  const redirectUri = `${window.location.origin}/auth/oauth/exchange`;
 
   const config = OAUTH_PROVIDERS[data.provider];
 
@@ -24,5 +25,10 @@ export const loginWithOAuth = (data: LoginWithOAuthRequest) => {
 
 export const exchangeOAuthCode = async (data: ExchangeOAuthCodeRequest) => {
   const response = await api.post<AuthResponse>("/api/v1/auth/oauth/exchange", data);
+  return response.data;
+};
+
+export const verifyMagicLink = async (data: VerifyMagicLinkRequest) => {
+  const response = await api.post<AuthResponse>("/api/v1/auth/magic-link/verify", data);
   return response.data;
 };

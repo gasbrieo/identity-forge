@@ -4,7 +4,7 @@ public sealed class GitHubOAuthOptions
 {
     public string ClientId { get; set; } = default!;
     public string ClientSecret { get; set; } = default!;
-    public string DefaultRedirectUri { get; set; } = default!;
+    public string DefaultRedirectUrl { get; set; } = default!;
 }
 
 internal sealed class GitHubOAuthOptionsValidator : IValidateOptions<GitHubOAuthOptions>
@@ -17,8 +17,8 @@ internal sealed class GitHubOAuthOptionsValidator : IValidateOptions<GitHubOAuth
         if (string.IsNullOrWhiteSpace(options.ClientSecret))
             return ValidateOptionsResult.Fail("GitHub ClientSecret not configured");
 
-        if (string.IsNullOrWhiteSpace(options.DefaultRedirectUri))
-            return ValidateOptionsResult.Fail("GitHub DefaultRedirectUri not configured");
+        if (string.IsNullOrWhiteSpace(options.DefaultRedirectUrl))
+            return ValidateOptionsResult.Fail("GitHub DefaultRedirectUrl not configured");
 
         return ValidateOptionsResult.Success;
     }

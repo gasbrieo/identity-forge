@@ -19,6 +19,10 @@ export interface ExchangeOAuthCodeRequest {
   code: string;
 }
 
+export interface VerifyMagicLinkRequest {
+  token: string;
+}
+
 export interface AuthResponse {
   email: string;
   name: string;

@@ -6,7 +6,7 @@ public static class InitialiserExtensions
     {
         builder.UseAsyncSeeding(async (context, _, ct) =>
         {
-            var initialiser = serviceProvider.GetRequiredService<ApplicationDbContextInitialiser>();
+            var initialiser = serviceProvider.GetRequiredService<AppDbContextInitialiser>();
             await initialiser.SeedAsync();
         });
     }
@@ -14,7 +14,7 @@ public static class InitialiserExtensions
     public static async Task InitialiseDatabaseAsync(this WebApplication app)
     {
         using var scope = app.Services.CreateScope();
-        var initialiser = scope.ServiceProvider.GetRequiredService<ApplicationDbContextInitialiser>();
+        var initialiser = scope.ServiceProvider.GetRequiredService<AppDbContextInitialiser>();
         await initialiser.InitialiseAsync();
     }
 }

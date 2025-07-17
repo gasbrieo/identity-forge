@@ -1,11 +1,10 @@
-using IdentityForge.Application.Identity;
-using IdentityForge.Application.Identity.OAuth;
+using IdentityForge.Application.Features.Auth.OAuth;
 
 namespace IdentityForge.Infrastructure.Identity.OAuth;
 
-internal sealed class OAuthProviderFactory(IEnumerable<IOAuthProviderService> providers) : IOAuthProviderFactory
+internal sealed class OAuthProviderFactory(IEnumerable<IOAuthProvider> providers) : IOAuthProviderFactory
 {
-    public IOAuthProviderService GetProvider(OAuthProvider provider)
+    public IOAuthProvider GetProvider(OAuthProvider provider)
         => providers.FirstOrDefault(x => x.Provider == provider)
            ?? throw new InvalidOperationException($"Provider '{provider}' not registered.");
 }

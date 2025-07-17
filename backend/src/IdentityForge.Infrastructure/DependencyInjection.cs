@@ -1,13 +1,19 @@
+using IdentityForge.Application.Email;
+using IdentityForge.Application.Features.Auth;
+using IdentityForge.Application.Features.Auth.MagicLink;
+using IdentityForge.Application.Features.Auth.OAuth;
 using IdentityForge.Application.Identity;
-using IdentityForge.Application.Identity.Authorization;
+using IdentityForge.Domain.MagicLinkTokens;
 using IdentityForge.Domain.Users;
 using IdentityForge.Infrastructure.Data;
+using IdentityForge.Infrastructure.Data.Repositories;
+using IdentityForge.Infrastructure.Email;
 using IdentityForge.Infrastructure.Identity;
 using IdentityForge.Infrastructure.Identity.Jwt;
+using IdentityForge.Infrastructure.Identity.MagicLink;
 using IdentityForge.Infrastructure.Identity.OAuth;
 using IdentityForge.Infrastructure.Identity.OAuth.GitHub;
 using IdentityForge.Infrastructure.Identity.OAuth.Google;
-using IdentityForge.Infrastructure.Options;
 
 namespace IdentityForge.Infrastructure;
 
@@ -15,20 +21,16 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddDbContext<ApplicationDbContext>((sp, opts) =>
+        services.AddDbContext<AppDbContext>((sp, opts) =>
         {
             opts.UseNpgsql(configuration.GetConnectionString("DefaultConnection")).AddAsyncSeeding(sp);
         });
 
-        services.AddScoped<ApplicationDbContextInitialiser>();
+        services.AddScoped<AppDbContextInitialiser>();
 
         services
             .AddHealthChecks()
-            .AddDbContextCheck<ApplicationDbContext>("Database");
-
-        services.AddIdentityCore<ApplicationUser>()
-            .AddRoles<ApplicationRole>()
-            .AddEntityFrameworkStores<ApplicationDbContext>();
+            .AddDbContextCheck<AppDbContext>("Database");
 
         services
             .AddOptions<AdminUserOptions>()
@@ -60,14 +62,7 @@ public static class DependencyInjection
                 };
             });
 
-        services.AddAuthorization(options =>
-        {
-            foreach (var permission in Permissions.All)
-            {
-                options.AddPolicy(permission.Name, policy =>
-                    policy.RequireRole(permission.Roles));
-            }
-        });
+        services.AddAuthorization();
 
         services.AddHttpContextAccessor();
 
@@ -78,18 +73,25 @@ public static class DependencyInjection
         services.AddSingleton<ITokenProvider, TokenProvider>();
 
         services
+            .AddOptions<MagicLinkOptions>()
+            .Bind(configuration.GetSection("MagicLink"))
+            .ValidateOnStart();
+
+        services.AddScoped<IMagicLinkProvider, MagicLinkProvider>();
+
+        services
             .AddOptions<GoogleOAuthOptions>()
             .Bind(configuration.GetSection("OAuth:Google"))
             .ValidateOnStart();
 
         services.AddSingleton<IValidateOptions<GoogleOAuthOptions>, GoogleOAuthOptionsValidator>();
 
-        services.AddHttpClient<GoogleOAuthProviderService>(client =>
+        services.AddHttpClient<GoogleOAuthProvider>(client =>
         {
             client.Timeout = TimeSpan.FromSeconds(10);
         });
 
-        services.AddScoped<IOAuthProviderService, GoogleOAuthProviderService>();
+        services.AddScoped<IOAuthProvider, GoogleOAuthProvider>();
 
         services
             .AddOptions<GitHubOAuthOptions>()
@@ -98,16 +100,20 @@ public static class DependencyInjection
 
         services.AddSingleton<IValidateOptions<GitHubOAuthOptions>, GitHubOAuthOptionsValidator>();
 
-        services.AddHttpClient<GitHubOAuthProviderService>(client =>
+        services.AddHttpClient<GitHubOAuthProvider>(client =>
         {
             client.Timeout = TimeSpan.FromSeconds(10);
         });
 
-        services.AddScoped<IOAuthProviderService, GitHubOAuthProviderService>();
+        services.AddScoped<IOAuthProvider, GitHubOAuthProvider>();
 
         services.AddScoped<IOAuthProviderFactory, OAuthProviderFactory>();
 
-        services.AddTransient<IIdentityService, IdentityService>();
+        services.AddSingleton<IEmailSender, FakeEmailSender>();
+
+        services.AddTransient<IUserRepository, UserRepository>();
+
+        services.AddTransient<IMagicLinkTokenRepository, MagicLinkTokenRepository>();
 
         return services;
     }

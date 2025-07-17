@@ -28,4 +28,9 @@ public static class AuthErrors
         "Auth.OAuthFailed",
         "Failed to exchange OAuth code."
     );
+
+    public static readonly Error MagicLinkFailed = Error.Problem(
+        "Auth.MagicLinkFailed",
+        "Failed to verify Magic Link token."
+    );
 }

@@ -22,7 +22,7 @@ internal sealed class JwtOptionsValidator : IValidateOptions<JwtOptions>
             return ValidateOptionsResult.Fail("JWT Audience not configured");
 
         if (options.ExpirationMinutes <= 0)
-            return ValidateOptionsResult.Fail("JWT expiration must be greater than zero");
+            return ValidateOptionsResult.Fail("JWT ExpirationMinutes not configured");
 
         return ValidateOptionsResult.Success;
     }

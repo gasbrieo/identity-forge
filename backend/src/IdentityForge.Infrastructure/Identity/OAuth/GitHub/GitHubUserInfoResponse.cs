@@ -1,5 +1,10 @@
 namespace IdentityForge.Infrastructure.Identity.OAuth.GitHub;
 
-public sealed record GitHubUserInfoResponse(
-    [property: JsonPropertyName("name")] string Name,
-    [property: JsonPropertyName("avatar_url")] string AvatarUrl);
+public sealed class GitHubUserInfoResponse
+{
+    [JsonPropertyName("name")]
+    public string Name { get; set; } = default!;
+
+    [JsonPropertyName("avatar_url")]
+    public string AvatarUrl { get; set; } = default!;
+};
