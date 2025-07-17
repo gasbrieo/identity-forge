@@ -27,8 +27,9 @@ app.MapVersionedEndpoints<IApiV1Endpoint>(new(1, 0));
 if (app.Environment.IsDevelopment())
 {
     app.UseSwaggerWithUi();
-    await app.InitialiseDatabaseAsync();
 }
+
+await app.InitialiseDatabaseAsync();
 
 app.MapHealthChecks("api/health", new HealthCheckOptions
 {

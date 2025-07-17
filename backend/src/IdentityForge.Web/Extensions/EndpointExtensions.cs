@@ -1,4 +1,3 @@
-using IdentityForge.Infrastructure.Identity;
 using IdentityForge.Web.Endpoints;
 
 namespace IdentityForge.Web.Extensions;
@@ -39,10 +38,5 @@ public static class EndpointExtensions
             endpoint.MapEndpoint(group);
 
         return app;
-    }
-
-    public static RouteHandlerBuilder HasPermission(this RouteHandlerBuilder app, PermissionDefinition permission)
-    {
-        return app.RequireAuthorization(permission.Name);
     }
 }

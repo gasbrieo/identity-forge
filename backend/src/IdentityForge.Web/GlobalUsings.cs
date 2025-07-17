@@ -1,4 +1,5 @@
 global using System.Reflection;
+global using System.Text.Json.Serialization;
 global using Asp.Versioning;
 global using HealthChecks.UI.Client;
 global using Microsoft.AspNetCore.Diagnostics;

@@ -1,6 +1,6 @@
 namespace IdentityForge.Web.Middleware;
 
-public class RequestContextLoggingMiddleware(RequestDelegate next)
+internal class RequestContextLoggingMiddleware(RequestDelegate next)
 {
     private const string CorrelationIdHeaderName = "Correlation-Id";
 

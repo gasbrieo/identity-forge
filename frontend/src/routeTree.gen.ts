@@ -9,38 +9,137 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
+import { Route as AuthLogoutRouteImport } from './routes/auth/logout'
+import { Route as AuthLoginRouteImport } from './routes/auth/login'
+import { Route as AuthOauthExchangeRouteImport } from './routes/auth/oauth/exchange'
+import { Route as AuthMagicLinkVerifyRouteImport } from './routes/auth/magic-link/verify'
+import { Route as AuthMagicLinkSendRouteImport } from './routes/auth/magic-link/send'
 
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DashboardIndexRoute = DashboardIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const AuthLogoutRoute = AuthLogoutRouteImport.update({
+  id: '/auth/logout',
+  path: '/auth/logout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthLoginRoute = AuthLoginRouteImport.update({
+  id: '/auth/login',
+  path: '/auth/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthOauthExchangeRoute = AuthOauthExchangeRouteImport.update({
+  id: '/auth/oauth/exchange',
+  path: '/auth/oauth/exchange',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthMagicLinkVerifyRoute = AuthMagicLinkVerifyRouteImport.update({
+  id: '/auth/magic-link/verify',
+  path: '/auth/magic-link/verify',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthMagicLinkSendRoute = AuthMagicLinkSendRouteImport.update({
+  id: '/auth/magic-link/send',
+  path: '/auth/magic-link/send',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/dashboard': typeof DashboardRouteWithChildren
+  '/auth/login': typeof AuthLoginRoute
+  '/auth/logout': typeof AuthLogoutRoute
+  '/dashboard/': typeof DashboardIndexRoute
+  '/auth/magic-link/send': typeof AuthMagicLinkSendRoute
+  '/auth/magic-link/verify': typeof AuthMagicLinkVerifyRoute
+  '/auth/oauth/exchange': typeof AuthOauthExchangeRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth/login': typeof AuthLoginRoute
+  '/auth/logout': typeof AuthLogoutRoute
+  '/dashboard': typeof DashboardIndexRoute
+  '/auth/magic-link/send': typeof AuthMagicLinkSendRoute
+  '/auth/magic-link/verify': typeof AuthMagicLinkVerifyRoute
+  '/auth/oauth/exchange': typeof AuthOauthExchangeRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/dashboard': typeof DashboardRouteWithChildren
+  '/auth/login': typeof AuthLoginRoute
+  '/auth/logout': typeof AuthLogoutRoute
+  '/dashboard/': typeof DashboardIndexRoute
+  '/auth/magic-link/send': typeof AuthMagicLinkSendRoute
+  '/auth/magic-link/verify': typeof AuthMagicLinkVerifyRoute
+  '/auth/oauth/exchange': typeof AuthOauthExchangeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/dashboard'
+    | '/auth/login'
+    | '/auth/logout'
+    | '/dashboard/'
+    | '/auth/magic-link/send'
+    | '/auth/magic-link/verify'
+    | '/auth/oauth/exchange'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/auth/login'
+    | '/auth/logout'
+    | '/dashboard'
+    | '/auth/magic-link/send'
+    | '/auth/magic-link/verify'
+    | '/auth/oauth/exchange'
+  id:
+    | '__root__'
+    | '/'
+    | '/dashboard'
+    | '/auth/login'
+    | '/auth/logout'
+    | '/dashboard/'
+    | '/auth/magic-link/send'
+    | '/auth/magic-link/verify'
+    | '/auth/oauth/exchange'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DashboardRoute: typeof DashboardRouteWithChildren
+  AuthLoginRoute: typeof AuthLoginRoute
+  AuthLogoutRoute: typeof AuthLogoutRoute
+  AuthMagicLinkSendRoute: typeof AuthMagicLinkSendRoute
+  AuthMagicLinkVerifyRoute: typeof AuthMagicLinkVerifyRoute
+  AuthOauthExchangeRoute: typeof AuthOauthExchangeRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +147,71 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dashboard/': {
+      id: '/dashboard/'
+      path: '/'
+      fullPath: '/dashboard/'
+      preLoaderRoute: typeof DashboardIndexRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/auth/logout': {
+      id: '/auth/logout'
+      path: '/auth/logout'
+      fullPath: '/auth/logout'
+      preLoaderRoute: typeof AuthLogoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/login': {
+      id: '/auth/login'
+      path: '/auth/login'
+      fullPath: '/auth/login'
+      preLoaderRoute: typeof AuthLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/oauth/exchange': {
+      id: '/auth/oauth/exchange'
+      path: '/auth/oauth/exchange'
+      fullPath: '/auth/oauth/exchange'
+      preLoaderRoute: typeof AuthOauthExchangeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/magic-link/verify': {
+      id: '/auth/magic-link/verify'
+      path: '/auth/magic-link/verify'
+      fullPath: '/auth/magic-link/verify'
+      preLoaderRoute: typeof AuthMagicLinkVerifyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/magic-link/send': {
+      id: '/auth/magic-link/send'
+      path: '/auth/magic-link/send'
+      fullPath: '/auth/magic-link/send'
+      preLoaderRoute: typeof AuthMagicLinkSendRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
+interface DashboardRouteChildren {
+  DashboardIndexRoute: typeof DashboardIndexRoute
+}
+
+const DashboardRouteChildren: DashboardRouteChildren = {
+  DashboardIndexRoute: DashboardIndexRoute,
+}
+
+const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
+  DashboardRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DashboardRoute: DashboardRouteWithChildren,
+  AuthLoginRoute: AuthLoginRoute,
+  AuthLogoutRoute: AuthLogoutRoute,
+  AuthMagicLinkSendRoute: AuthMagicLinkSendRoute,
+  AuthMagicLinkVerifyRoute: AuthMagicLinkVerifyRoute,
+  AuthOauthExchangeRoute: AuthOauthExchangeRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
