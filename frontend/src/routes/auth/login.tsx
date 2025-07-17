@@ -1,4 +1,4 @@
-import { createFileRoute, redirect } from "@tanstack/react-router";
+import { createFileRoute, Link, redirect } from "@tanstack/react-router";
 import { ShieldIcon } from "lucide-react";
 
 import { Button } from "~/components/ui/button";
@@ -58,7 +58,9 @@ const LoginPage = () => {
           Continue with GitHub
         </Button>
 
-        <Button variant="outline">Continue with Email</Button>
+        <Button variant="outline" asChild>
+          <Link to="/auth/magic-link/send">Continue with Email</Link>
+        </Button>
       </div>
     </main>
   );
