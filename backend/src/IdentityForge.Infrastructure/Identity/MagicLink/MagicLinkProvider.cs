@@ -4,7 +4,7 @@ using IdentityForge.Domain.MagicLinkTokens;
 
 namespace IdentityForge.Infrastructure.Identity.MagicLink;
 
-public class MagicLinkProvider(IOptions<MagicLinkOptions> options, IEmailSender emailSender) : IMagicLinkProvider
+internal class MagicLinkProvider(IOptions<MagicLinkOptions> options, IEmailSender emailSender) : IMagicLinkProvider
 {
     private readonly MagicLinkOptions _magicLinkOptions = options.Value;
 

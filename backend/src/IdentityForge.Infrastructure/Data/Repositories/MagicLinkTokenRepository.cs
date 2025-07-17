@@ -2,7 +2,7 @@ using IdentityForge.Domain.MagicLinkTokens;
 
 namespace IdentityForge.Infrastructure.Data.Repositories;
 
-public class MagicLinkTokenRepository(AppDbContext context) : IMagicLinkTokenRepository
+internal class MagicLinkTokenRepository(AppDbContext context) : IMagicLinkTokenRepository
 {
     public Task<MagicLinkToken?> GetValidTokenAsync(string token, CancellationToken cancellationToken = default)
     {

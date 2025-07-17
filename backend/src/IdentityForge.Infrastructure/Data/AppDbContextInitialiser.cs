@@ -3,7 +3,7 @@ using IdentityForge.Infrastructure.Identity;
 
 namespace IdentityForge.Infrastructure.Data;
 
-public class AppDbContextInitialiser(ILogger<AppDbContextInitialiser> logger, IOptions<AdminUserOptions> options, AppDbContext context)
+internal class AppDbContextInitialiser(ILogger<AppDbContextInitialiser> logger, IOptions<AdminUserOptions> options, AppDbContext context)
 {
     private readonly AdminUserOptions _adminUserOptions = options.Value;
 

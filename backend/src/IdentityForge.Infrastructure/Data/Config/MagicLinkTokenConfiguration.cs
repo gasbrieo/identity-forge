@@ -2,7 +2,7 @@ using IdentityForge.Domain.MagicLinkTokens;
 
 namespace IdentityForge.Infrastructure.Data.Config;
 
-public class MagicLinkTokenConfiguration : IEntityTypeConfiguration<MagicLinkToken>
+internal class MagicLinkTokenConfiguration : IEntityTypeConfiguration<MagicLinkToken>
 {
     public void Configure(EntityTypeBuilder<MagicLinkToken> builder)
     {

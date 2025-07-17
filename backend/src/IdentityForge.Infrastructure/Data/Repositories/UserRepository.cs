@@ -2,7 +2,7 @@ using IdentityForge.Domain.Users;
 
 namespace IdentityForge.Infrastructure.Data.Repositories;
 
-public class UserRepository(AppDbContext context) : IUserRepository
+internal class UserRepository(AppDbContext context) : IUserRepository
 {
     public Task<User?> GetByEmailAsync(string email, CancellationToken cancellationToken = default)
     {
